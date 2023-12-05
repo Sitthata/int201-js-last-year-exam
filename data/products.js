@@ -1165,5 +1165,5 @@ const products = [
   }
 ]
 
-export { products }
-// module.exports = products
+// export { products }
+module.exports = products

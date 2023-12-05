@@ -1,11 +1,10 @@
-import { products } from './data/products.js'
+// import { products } from './data/products.js'
 
 function itemList(userItems) {
   const items = userItems
 
   const initialPage = () => {
     const input = document.querySelector("input");
-    const ul = document.getElementById("items")
     input.addEventListener("keydown", filterItemsHandler)
     showItems(items);
 
@@ -24,7 +23,7 @@ function itemList(userItems) {
     listItem.innerHTML = "";
     function createLi(item) {
       const li = document.createElement("li");
-      li.textContent = `ID: ${item.id}, NAME: ${item.name}, KEYWORDS: ${item.keywords}`
+      li.textContent = `ID:${item.id}, NAME:${item.name}, KEYWORDS:${item.keywords}`
       return li;
     }
 
@@ -40,12 +39,7 @@ function itemList(userItems) {
     showItems
   }
 }
-export { itemList }
+module.exports = itemList;
 
-
-
-const data = products;
-const { initialPage, filterItemsHandler, showItems } = itemList(data);
-initialPage();
 
 

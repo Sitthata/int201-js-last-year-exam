@@ -4,27 +4,34 @@ function itemList(userItems) {
   const items = userItems
 
   const initialPage = () => {
-    const inputItem = document.querySelector('input')
-    inputItem.addEventListener('keydown', filterItemsHandler)
-    showItems(items)
-    console.log(inputItem)
+    const input = document.querySelector("input");
+    const ul = document.getElementById("items")
+    input.addEventListener("keydown", filterItemsHandler)
+    showItems(items);
+
+    console.log(input);
   }
 
   const filterItemsHandler = (event) => {
-    const inputI = document.querySelector('input')
-    const aryFind = items.filter((e) => e.keywords.toLowerCase().includes((`${inputI.value}`).toLowerCase()))
-    showItems(aryFind)
+    const value = event.target.value.toLowerCase();
+    const filteredData = items.filter((item) => item.keywords.toLowerCase().includes(value));
+    showItems(filteredData);
+    console.log(value);
   }
 
   const showItems = (items) => {
-    const aryRecieve = items
-    const ulParent = document.getElementById('items')
-    ulParent.textContent = ''
-    for (let i = 0; i < aryRecieve.length; i++) {
-      const liItem = document.createElement('li')
-      liItem.textContent = `ID:${aryRecieve[i].id}, NAME:${aryRecieve[i].name}, KEYWORDS:${aryRecieve[i].keywords}`
-      ulParent.appendChild(liItem)
+    const listItem = document.getElementById("items");
+    listItem.innerHTML = "";
+    function createLi(item) {
+      const li = document.createElement("li");
+      li.textContent = `ID: ${item.id}, NAME: ${item.name}, KEYWORDS: ${item.keywords}`
+      return li;
     }
+
+    items.forEach((item) => {
+      const li = createLi(item);
+      listItem.appendChild(li);
+    })
   }
 
   return {
@@ -34,6 +41,11 @@ function itemList(userItems) {
   }
 }
 export { itemList }
-const { initialPage, filterItemsHandler, showItems } = itemList(products)
-initialPage()
+
+
+
+const data = products;
+const { initialPage, filterItemsHandler, showItems } = itemList(data);
+initialPage();
+
 
